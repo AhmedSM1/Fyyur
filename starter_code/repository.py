@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import Column, String, Integer, Boolean, DateTime, ARRAY, ForeignKey
 db = SQLAlchemy()
 
 
@@ -12,10 +12,12 @@ class Venue(db.Model):
     state = db.Column(db.String(120))
     address = db.Column(db.String(120))
     phone = db.Column(db.String(120))
+    genres = db.Column(ARRAY(String))
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
-    seeking_talent = db.Column(db.Boolean())
-
+    seeking_talent = db.Column(db.String(120))
+    description = db.Column(db.String(500))
+    
 class Artist(db.Model):
     __tablename__ = 'Artist'
 
@@ -26,11 +28,12 @@ class Artist(db.Model):
     address = db.Column(db.String(120))
     phone = db.Column(db.String(120))
     email = db.Column(db.String)
-    genres = db.Column(db.String(120))
+    genres = db.Column(ARRAY(String))
     image_link = db.Column(db.String(500))
-    facebook_link = db.Column(db.String(120))
-    website =  db.Column(db.String(120))
-    seeking_venue = db.Column(db.Boolean())
+    facebook_link = db.Column(db.String(500))
+    website =  db.Column(db.String(500))
+    seeking_venue = db.Column(db.String(120))
+    description = db.Column(db.String(500))
 
 class Show(db.Model):
     __tablename__ = 'Show'
