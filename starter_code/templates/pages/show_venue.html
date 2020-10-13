@@ -12,6 +12,11 @@
 		<p class="subtitle">
 			ID: {{ venue.id }}
 		</p>
+		<div>
+			<a href="/"><button type="button" class="btn btn-danger" onclick=" deleteVenue()">Delete</button></a>
+			<a href="/venues/{{ venue.id }}/edit"><button type="button" class="btn btn-primary">Edit</button></a>
+		</div>
+
 		<div class="genres">
 			{% for genre in venue.genres %}
 			<span class="genre">{{ genre }}</span>
@@ -55,9 +60,10 @@
 		{%for show in venue.upcoming_shows %}
 		<div class="col-sm-4">
 			<div class="tile tile-show">
+
 				<img src="{{ show.artist_image_link }}" alt="Show Artist Image" />
 				<h5><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h5>
-				<h6>{{ show.start_time|datetime('full') }}</h6>
+				<h6>{{ show.time }}</h6>
 			</div>
 		</div>
 		{% endfor %}
@@ -71,12 +77,33 @@
 			<div class="tile tile-show">
 				<img src="{{ show.artist_image_link }}" alt="Show Artist Image" />
 				<h5><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h5>
-				<h6>{{ show.start_time|datetime('full') }}</h6>
+				<h6>{{ show.time }}</h6>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </section>
 
+
+<script>
+	function deleteVenue() {
+	event.preventDefault();
+	var id = {{ venue.id }}
+	console.log("button clicked and venue id is "+ id)
+	fetch('/venues/' + id,{
+	method: 'DELETE',
+	headers: {'Content-Type':'application/json'}
+})
+.then(response => {
+	window.location.href = response.url;
+})
+.catch(function(e){
+	console.log(e);
+	})
+}
+
+
+</script>
 {% endblock %}
+
 

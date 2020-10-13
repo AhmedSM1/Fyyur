@@ -79,6 +79,7 @@ genres_list=[
             ('Soul', 'Soul'),
             ('Other', 'Other'),
         ]
+
 class ShowForm(Form):
     artist_id = StringField(
         'artist_id'
@@ -86,9 +87,10 @@ class ShowForm(Form):
     venue_id = StringField(
         'venue_id'
     )
-    date = DateTimeField(
-        'date',
-        validators=[DataRequired()]
+    time = DateTimeField(
+        'time',
+        validators=[DataRequired()],
+        default=datetime.today()
     )
 
 
@@ -109,6 +111,12 @@ class VenueForm(Form):
     phone = StringField(
         'phone'
     )
+
+    email =  StringField('Email', [
+        Email(message='Not a valid email address.'),
+        DataRequired()]
+    )
+  
     image_link = StringField(
         'image_link'
     )
@@ -118,6 +126,9 @@ class VenueForm(Form):
     )
     facebook_link = StringField(
         'facebook_link', validators=[URL()]
+    )
+    website = StringField(
+        'website', validators=[URL()]
     )
 
     seeking_talent = BooleanField(

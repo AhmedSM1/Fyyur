@@ -9,6 +9,13 @@
 		<p class="subtitle">
 			ID: {{ artist.id }}
 		</p>
+
+
+		<div>
+			<a href="/"><button type="button" class="btn btn-danger" onclick=" deleteArtist()">Delete</button></a>
+			<a href="/artist/{{ artist.id }}/edit"><button type="button" class="btn btn-primary">Edit</button></a>
+		</div>
+
 		<div class="genres">
 			{% for genre in artist.genres %}
 			<span class="genre">{{ genre }}</span>
@@ -30,7 +37,7 @@
 		<div class="seeking">
 			<p class="lead">Currently seeking performance venues</p>
 			<div class="description">
-				<i class="fas fa-quote-left"></i> {{ artist.description }} <i class="fas fa-quote-right"></i>
+				<i class="fas fa-quote-left"></i> {{ artist.seeking_description }} <i class="fas fa-quote-right"></i>
 			</div>
 		</div>
 		{% else %}	
@@ -44,9 +51,9 @@
 	</div>
 </div>
 <section>
-	<h2 class="monospace">{{ shows.count }} Upcoming {% if shows.count == 1 %}Show{% else %}Shows{% endif %}</h2>
+	<h2 class="monospace">{{ artist.upcoming_shows_count }} Upcoming {% if artist.upcoming_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
 	<div class="row">
-		{%for show in shows %}
+		{%for show in artist.upcoming_shows %}
 		<div class="col-sm-4">
 			<div class="tile tile-show">
 				<img src="{{ show.venue_image_link }}" alt="Show Venue Image" />
@@ -72,5 +79,24 @@
 	</div>
 </section>
 
+<script>
+	function deleteArtist() {
+	event.preventDefault();
+	var id = {{ artist.id }}
+	console.log("button clicked and venue id is "+ id)
+	fetch('/artist/' + id,{
+	method: 'DELETE',
+	headers: {'Content-Type':'application/json'}
+})
+.then(response => {
+	window.location.href = response.url;
+})
+.catch(function(e){
+	console.log(e);
+	})
+}
+
+
+</script>
 {% endblock %}
 

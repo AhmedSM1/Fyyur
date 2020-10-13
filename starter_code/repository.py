@@ -12,12 +12,15 @@ class Venue(db.Model):
     state = db.Column(db.String(120))
     address = db.Column(db.String(120))
     phone = db.Column(db.String(120))
+    email = db.Column(db.String(120))
+    website =  db.Column(db.String(500))
     genres = db.Column(ARRAY(String))
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
-    seeking_talent = db.Column(db.String(120))
+    seeking_talent =  db.Column(db.String(120))
     description = db.Column(db.String(500))
     
+
 class Artist(db.Model):
     __tablename__ = 'Artist'
 
@@ -27,18 +30,21 @@ class Artist(db.Model):
     state = db.Column(db.String(120))
     address = db.Column(db.String(120))
     phone = db.Column(db.String(120))
-    email = db.Column(db.String)
+    email = db.Column(db.String(120))
     genres = db.Column(ARRAY(String))
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(500))
     website =  db.Column(db.String(500))
-    seeking_venue = db.Column(db.String(120))
+    seeking_venue =  db.Column(db.String(120))
     description = db.Column(db.String(500))
+    
+
+
 
 class Show(db.Model):
     __tablename__ = 'Show'
-    id = db.Column(db.Integer, primary_key=True)
-    artist_id = db.Column( db.Integer, db.ForeignKey('Artist.id'), primary_key=True)
-    venue_id = db.Column( db.Integer, db.ForeignKey('Venue.id'), primary_key=True)
-    time = db.Column(db.DateTime)
-
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id'), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey(
+        'Artist.id'), nullable=False)
+    time = db.Column(db.DateTime, nullable=False)
