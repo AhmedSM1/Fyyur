@@ -13,7 +13,6 @@ import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm.attributes import flag_modified
 from repository import db, Artist, Venue, Show
 from forms import *
 from sqlalchemy import exc
