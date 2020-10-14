@@ -1,59 +1,69 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Edit Artist{% endblock %}
 {% block content %}
+
+
+
+
+
+
   <div class="form-wrapper">
     <form class="form" method="post" action="/artists/{{artist.id}}/edit">
-      <h3 class="form-heading">Edit artist <em>{{ artist.name }}</em></h3>
+      <h3 class="form-heading">Edit artist:  <em>{{ artist.name }}</em> <a href="{{ url_for('index') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
 
       <div class="form-group">
+        <label for="img_link">Image:</label>
+        {{ form.img_link(class_ = 'form-control', autofocus = true, value= artist.image_link) }}
+      </div>
+      <div class="form-group">
         <label for="name">Name</label>
-        {{ form.name(class_ = 'form-control', autofocus = true) }}
+        {{ form.name(class_ = 'form-control', autofocus = true, value= artist.name) }}
       </div>
       <div class="form-group">
           <label>City & State</label>
           <div class="form-inline">
             <div class="form-group">
-              {{ form.city(class_ = 'form-control', placeholder='City', autofocus = true) }}
+              {{ form.city(class_ = 'form-control',  autofocus = true, value= artist.city) }}
             </div>
             <div class="form-group">
-              {{ form.state(class_ = 'form-control', placeholder='State', autofocus = true) }}
+              {{ form.state(class_ = 'form-control',  autofocus = true, value= artist.state) }}
             </div>
           </div>
       </div>
         <div class="form-group">
           <label for="address">Adress</label>
-          {{ form.address(class_ = 'form-control', placeholder='Address', autofocus = true) }}
+          {{ form.address(class_ = 'form-control',  autofocus = true, value= artist.address) }}
         </div>
       <div class="form-group">
           <label for="phone">Phone</label>
-          {{ form.phone(class_ = 'form-control', placeholder='xxx-xxx-xxxx', autofocus = true) }}
+          {{ form.phone(class_ = 'form-control',  autofocus = true, value= artist.phone) }}
         </div>
         <div class="form-group">
           <label for="email">email</label>
-          {{ form.email(class_ = 'form-control',  autofocus = true) }}
+          {{ form.email(class_ = 'form-control',  autofocus = true, value= artist.email) }}
         </div>
       <div class="form-group">
         <label for="genres">Genres</label>
         <small>Ctrl+Click to select multiple</small>
-        {{ form.genres(class_ = 'form-control', placeholder='Genres, separated by commas', autofocus = true) }}
+        {{ form.genres(class_ = 'form-control', autofocus = true, value= artist.genres) }}
       </div>
       <div class="form-group">
           <label for="facebook_link">Facebook Link</label>
-          {{ form.facebook_link(class_ = 'form-control', placeholder='https://www.facebook.com/', autofocus = true) }}
+          {{ form.facebook_link(class_ = 'form-control', autofocus = true, value=artist.facebook_link) }}
         </div>
         <div class="form-group">
           <label for="website">Website</label>
-          {{ form.website(class_ = 'form-control', placeholder='https://', autofocus = true) }}
+          {{ form.website(class_ = 'form-control', autofocus = true, value= artist.website) }}
         </div>
 
         <div class="form-group">
           <label for="seeking_venue">seeking venue? </label>
-          {{ form.seeking_venue(class_ = 'form-control' , autofocus = true) }}
+          {{ form.seeking_venue(class_ = 'form-control' , autofocus = true, value= artist.seeking_venue) }}
         </div>
 
         <div class="form-group">
           <label for="description"> Tell us more about yourself?  </label>
-          {{ form.description(class_ = 'form-control', autofocus = true) }}
+          {{ form.description(class_ = 'form-control', autofocus = true, value= artist.description) }}
         </div>
 
       <input type="submit" value="Edit Artist" class="btn btn-primary btn-lg btn-block">

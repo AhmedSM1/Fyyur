@@ -185,7 +185,6 @@ class ArtistForm(Form):
     )
 
     description = StringField(
-        # TODO implement validation logic for state
         'description', validators=[DataRequired()]
     )
 
